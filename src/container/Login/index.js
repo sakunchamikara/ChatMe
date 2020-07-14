@@ -1,9 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {Text, SafeAreaView, View} from 'react-native';
 import {Logo, InputField, RoundCornerButton} from '../../component';
 import {globalStyle, color} from '../../utility';
+import {Store} from '../../context/store';
+import {LOADING_START, LOADING_STOP} from '../../context/actions/type';
 
 const Login = ({navigation}) => {
+  const globalState = useContext(Store);
+  const {dispatchLoaderAction} = globalState;
   const [credential, setCredentials] = useState({
     email: '',
     password: '',
@@ -21,7 +25,14 @@ const Login = ({navigation}) => {
     } else if (!password) {
       alert('Password is required');
     } else {
-      alert(JSON.stringify(credential));
+      dispatchLoaderAction({
+        type: LOADING_START,
+      });
+      setTimeout(() => {
+        dispatchLoaderAction({
+          type: LOADING_STOP,
+        });
+      }, 2000);
     }
   };
 
