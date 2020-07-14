@@ -1,6 +1,6 @@
-import firebase from "../../firebase/config";
+import firebase from '../../firebase/config';
 
-const loginRequest = async (email, password) => {
+const LoginRequest = async (email, password) => {
   try {
     return await firebase.auth().signInWithEmailAndPassword(email, password);
   } catch (error) {
@@ -8,4 +8,4 @@ const loginRequest = async (email, password) => {
   }
 };
 
-export default loginRequest;
+export default LoginRequest;
