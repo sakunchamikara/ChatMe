@@ -1,5 +1,5 @@
 import React, {useLayoutEffect, useContext, useState, useEffect} from 'react';
-import {Alert, SafeAreaView, FlatList} from 'react-native';
+import {Alert, SafeAreaView, FlatList, View} from 'react-native';
 import {color} from '../../utility';
 import ImagePicker from 'react-native-image-picker';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
@@ -10,11 +10,13 @@ import firebase from '../../firebase/config';
 import {Store} from '../../context/store';
 import {LOADING_STOP, LOADING_START} from '../../context/actions/type';
 import {uuid, smallDeviceHeight} from '../../utility/constants';
+import {deviceHeight} from '../../utility/styleHelper/appStyle';
 
 const Dashboard = ({navigation}) => {
   const globalState = useContext(Store);
   const {dispatchLoaderAction} = globalState;
 
+  const [getScrollPosition, setScrollPosition] = useState(0);
   const [userDetail, setUserDetail] = useState({
     id: '',
     name: '',
@@ -161,20 +163,44 @@ const Dashboard = ({navigation}) => {
       });
     }
   };
-
+  const getOpacity = () => {
+    if (deviceHeight < smallDeviceHeight) {
+      return deviceHeight / 4;
+    } else {
+      return deviceHeight / 6;
+    }
+  };
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: color.BLACK}}>
+      {getScrollPosition > getOpacity() && (
+        <StickyHeader
+          name={name}
+          img={profileImg}
+          onImgTap={() => imgTap(profileImg, name)}
+        />
+      )}
       <FlatList
         alwaysBounceVertical={false}
         data={allUsers}
         keyExtractor={(_, index) => index.toString()}
+        onScroll={(event) =>
+          setScrollPosition(event.nativeEvent.contentOffset.y)
+        }
         ListHeaderComponent={
-          <Profile
-            img={profileImg}
-            name={name}
-            onEditImgTap={() => selectPhotoTapped()}
-            onImgTap={() => imgTap(profileImg, name)}
-          />
+          <View
+            style={{
+              opacity:
+                getScrollPosition < getOpacity()
+                  ? (getOpacity() - getScrollPosition) / 100
+                  : 0,
+            }}>
+            <Profile
+              img={profileImg}
+              name={name}
+              onEditImgTap={() => selectPhotoTapped()}
+              onImgTap={() => imgTap(profileImg, name)}
+            />
+          </View>
         }
         renderItem={({item}) => (
           <ShowUsers
