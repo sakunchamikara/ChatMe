@@ -1,9 +1,10 @@
 import React, {useLayoutEffect, useContext, useState, useEffect} from 'react';
-import {View, Text, Alert} from 'react-native';
+import {Alert, SafeAreaView, FlatList} from 'react-native';
 import {color} from '../../utility';
+import ImagePicker from 'react-native-image-picker';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {clearAsyncStorage} from '../../asyncStorge';
-import {LogOutUser} from '../../network';
+import {LogOutUser, UpdateUser} from '../../network';
 import {Profile, ShowUsers, StickyHeader} from '../../component';
 import firebase from '../../firebase/config';
 import {Store} from '../../context/store';
@@ -21,6 +22,7 @@ const Dashboard = ({navigation}) => {
   });
 
   const [allUsers, setAllUsers] = useState([]);
+  const {profileImg, name} = userDetail;
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -55,7 +57,84 @@ const Dashboard = ({navigation}) => {
     dispatchLoaderAction({
       type: LOADING_START,
     });
-  });
+    try {
+      firebase
+        .database()
+        .ref('users')
+        .on('value', (dataSnapshot) => {
+          let users = [];
+          let currentUser = {
+            id: '',
+            name: '',
+            profileImg: '',
+          };
+          dataSnapshot.forEach((child) => {
+            if (uuid === child.val().uuid) {
+              currentUser.id = uuid;
+              currentUser.name = child.val().name;
+              currentUser.profileImg = child.val().profileImg;
+            } else {
+              users.push({
+                id: child.val().uuid,
+                name: child.val().name,
+                profileImg: child.val().profileImg,
+              });
+            }
+          });
+          setUserDetail(currentUser);
+          setAllUsers(users);
+          dispatchLoaderAction({
+            type: LOADING_STOP,
+          });
+        });
+    } catch (error) {
+      alert(error);
+      dispatchLoaderAction({
+        type: LOADING_STOP,
+      });
+    }
+  }, []);
+  const selectPhotoTapped = () => {
+    const options = {
+      storageOptions: {
+        skipBackup: true,
+      },
+    };
+
+    ImagePicker.showImagePicker(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled photo picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        // Base 64 image:
+        let source = 'data:image/jpeg;base64,' + response.data;
+        dispatchLoaderAction({
+          type: LOADING_START,
+        });
+        UpdateUser(uuid, source)
+          .then(() => {
+            setUserDetail({
+              ...userDetail,
+              profileImg: source,
+            });
+            dispatchLoaderAction({
+              type: LOADING_STOP,
+            });
+          })
+          .catch((err) => {
+            alert(err);
+            dispatchLoaderAction({
+              type: LOADING_STOP,
+            });
+          });
+      }
+    });
+  };
 
   const logout = () => {
     LogOutUser()
@@ -69,10 +148,43 @@ const Dashboard = ({navigation}) => {
       .catch((err) => alert(err));
   };
 
+  const imgTap = (profileImg, name) => {
+    if (!profileImg) {
+      navigation.navigate('ShowFullImg', {
+        name,
+        imgText: name.charAt(0),
+      });
+    } else {
+      navigation.navigate('ShowFullImg', {
+        name,
+        img: profileImg,
+      });
+    }
+  };
+
   return (
-    <View>
-      <Text>Dashboard</Text>
-    </View>
+    <SafeAreaView style={{flex: 1, backgroundColor: color.BLACK}}>
+      <FlatList
+        alwaysBounceVertical={false}
+        data={allUsers}
+        keyExtractor={(_, index) => index.toString()}
+        ListHeaderComponent={
+          <Profile
+            img={profileImg}
+            name={name}
+            onEditImgTap={() => selectPhotoTapped()}
+            onImgTap={() => imgTap(profileImg, name)}
+          />
+        }
+        renderItem={({item}) => (
+          <ShowUsers
+            name={item.name}
+            img={item.profileImg}
+            onImgTap={() => imgTap(item.profileImg, item.name)}
+          />
+        )}
+      />
+    </SafeAreaView>
   );
 };
 

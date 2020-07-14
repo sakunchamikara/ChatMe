@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { color } from "../../utility";
+import {StyleSheet} from 'react-native';
+import {color} from '../../utility';
 
 export default StyleSheet.create({
   cardStyle: {
@@ -17,10 +17,10 @@ export default StyleSheet.create({
     borderColor: color.WHITE,
     borderWidth: 2,
     borderRadius: 30,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: color.DARK_GRAY,
   },
-  thumbnailName: { fontSize: 30, color: color.WHITE, fontWeight: "bold" },
-  profileName: { fontSize: 20, color: color.WHITE, fontWeight: "bold" },
+  thumbnailName: {fontSize: 30, color: color.WHITE, fontWeight: 'bold'},
+  profileName: {fontSize: 20, color: color.WHITE, fontWeight: 'bold'},
 });
