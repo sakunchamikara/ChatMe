@@ -163,6 +163,25 @@ const Dashboard = ({navigation}) => {
       });
     }
   };
+
+  const nameTap = (profileImg, name, guestUserId) => {
+    if (!profileImg) {
+      navigation.navigate('Chat', {
+        name,
+        imgText: name.charAt(0),
+        guestUserId,
+        currentUserId: uuid,
+      });
+    } else {
+      navigation.navigate('Chat', {
+        name,
+        img: profileImg,
+        guestUserId,
+        currentUserId: uuid,
+      });
+    }
+  };
+
   const getOpacity = () => {
     if (deviceHeight < smallDeviceHeight) {
       return deviceHeight / 4;
@@ -170,6 +189,7 @@ const Dashboard = ({navigation}) => {
       return deviceHeight / 6;
     }
   };
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: color.BLACK}}>
       {getScrollPosition > getOpacity() && (
@@ -207,6 +227,7 @@ const Dashboard = ({navigation}) => {
             name={item.name}
             img={item.profileImg}
             onImgTap={() => imgTap(item.profileImg, item.name)}
+            onNameTap={() => nameTap(item.profileImg, item.name, item.id)}
           />
         )}
       />
