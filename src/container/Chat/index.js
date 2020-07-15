@@ -139,6 +139,7 @@ const Chat = ({route, navigation}) => {
                   size={appStyle.fieldHeight}
                   onPress={() => handleCamera()}
                 />
+
                 <MaterialCommunityIcons
                   name="send-circle"
                   color={color.WHITE}
