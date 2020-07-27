@@ -90,7 +90,7 @@ const Login = ({navigation}) => {
       style={[globalStyle.flex1, {backgroundColor: color.BLACK}]}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <SafeAreaView
-          style={[globalStyle.flex1, {backgroundColor: color.BLACK}]}>
+          style={[globalStyle.flex1, {backgroundColor: color.WHITE}]}>
           {showLogo && (
             <View style={[globalStyle.containerCentered]}>
               <Logo />
@@ -117,7 +117,7 @@ const Login = ({navigation}) => {
               style={{
                 fontSize: 28,
                 fontWeight: 'bold',
-                color: color.LIGHT_GREEN,
+                color: color.BLACK,
               }}
               onPress={() => navigation.navigate('SignUp')}>
               Sign Up

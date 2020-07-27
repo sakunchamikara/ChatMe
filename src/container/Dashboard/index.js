@@ -191,7 +191,7 @@ const Dashboard = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: color.BLACK}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: color.WHITE}}>
       {getScrollPosition > getOpacity() && (
         <StickyHeader
           name={name}

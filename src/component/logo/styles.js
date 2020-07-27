@@ -25,13 +25,13 @@ export default StyleSheet.create({
     height: getDimensions().height,
     width: getDimensions().width,
     borderRadius: getDimensions().borderRadius,
-    backgroundColor: color.DARK_GRAY,
+    backgroundColor: color.W_BLUE,
     alignItems: 'center',
     justifyContent: 'center',
   },
   text: {
     fontSize: getDimensions().logoFontSize,
     fontWeight: 'bold',
-    color: color.WHITE,
+    color: color.DARK_LIME_GREEN,
   },
 });

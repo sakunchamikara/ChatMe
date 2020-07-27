@@ -21,12 +21,12 @@ const Splash = ({navigation}) => {
           console.log(err);
           navigation.replace('Login');
         });
-    }, 3000);
+    }, 1000);
     return () => clearTimeout(redirect);
   }, [navigation]);
   return (
     <View
-      style={[globalStyle.containerCentered, {backgroundColor: color.BLACK}]}>
+      style={[globalStyle.containerCentered, {backgroundColor: color.L_BLUE}]}>
       <Logo />
     </View>
   );

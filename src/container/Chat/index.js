@@ -102,11 +102,11 @@ const Chat = ({route, navigation}) => {
     navigation.navigate('ShowFullImg', {name, img: chatImg});
   };
   return (
-    <SafeAreaView style={[globalStyle.flex1, {backgroundColor: color.BLACK}]}>
+    <SafeAreaView style={[globalStyle.flex1, {backgroundColor: color.CREAM}]}>
       <KeyboardAvoidingView
         keyboardVerticalOffset={deviceHeight > smallDeviceHeight ? 100 : 70}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={[globalStyle.flex1, {backgroundColor: color.BLACK}]}>
+        style={[globalStyle.flex1, {backgroundColor: color.CREAM}]}>
         <TouchableWithoutFeedback
           style={[globalStyle.flex1]}
           onPress={Keyboard.dismiss}>

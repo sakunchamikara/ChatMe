@@ -22,7 +22,7 @@ const ChatBox = ({userId, msg, img, onImgTap}) => {
           isCurrentUser && {
             borderTopLeftRadius: 20,
             borderTopRightRadius: 0,
-            backgroundColor: color.DARK_GRAY,
+            backgroundColor: color.CHAT_BOX,
           },
         ]}>
         {img ? (

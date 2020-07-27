@@ -20,7 +20,7 @@ function NavContainer() {
         initialRouteName="Splash"
         screenOptions={{
           headerShown: true,
-          headerStyle: {backgroundColor: color.DARK_GRAY},
+          headerStyle: {backgroundColor: color.CHAT_BOX},
           headerTintColor: color.WHITE,
           headerTitleAlign: 'center',
           headerTitleStyle: {

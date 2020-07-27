@@ -1,14 +1,14 @@
-import { StyleSheet } from "react-native";
-import { color } from "../../utility";
+import {StyleSheet} from 'react-native';
+import {color} from '../../utility';
 
 export default StyleSheet.create({
   cardStyle: {
-    backgroundColor: color.SEMI_TRANSPARENT,
+    backgroundColor: color.W_BLUE,
     borderBottomWidth: 1,
     borderColor: color.SILVER,
   },
   cardItemStyle: {
-    backgroundColor: color.SEMI_TRANSPARENT,
+    backgroundColor: color.W_BLUE,
   },
 
   logoContainer: {
@@ -17,10 +17,10 @@ export default StyleSheet.create({
     borderColor: color.WHITE,
     borderWidth: 2,
     borderRadius: 30,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: color.DARK_GRAY,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: color.L_BLUE,
   },
-  thumbnailName: { fontSize: 30, color: color.WHITE, fontWeight: "bold" },
-  profileName: { fontSize: 20, color: color.WHITE, fontWeight: "bold" },
+  thumbnailName: {fontSize: 30, color: color.WHITE, fontWeight: 'bold'},
+  profileName: {fontSize: 20, color: color.WHITE, fontWeight: 'bold'},
 });

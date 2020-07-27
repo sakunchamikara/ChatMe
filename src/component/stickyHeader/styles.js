@@ -8,13 +8,13 @@ export default StyleSheet.create({
     borderColor: color.SILVER,
   },
   cardItemStyle: {
-    backgroundColor: color.DARK_LIME_GREEN,
+    backgroundColor: color.D_BLUE,
   },
 
   logoContainer: {
     height: 60,
     width: 60,
-    borderColor: color.WHITE,
+    borderColor: color.W_BLUE,
     borderWidth: 2,
     borderRadius: 30,
     alignItems: 'center',

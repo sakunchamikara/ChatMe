@@ -41,5 +41,10 @@ export const GRADIENT_PRIMARY = ['rgb(0, 169, 244)', 'rgb(0, 169, 244)'];
 /* HomeList Color*/
 export const LIGHT_GREEN = '#99BA93';
 export const GREEN = 'rgb(0,120,0)';
+export const W_BLUE = 'rgb(52,183,241)';
+export const L_BLUE = 'rgb(110,255,255)';
+export const D_BLUE = 'rgb(47,86,233)';
+export const CREAM = 'rgb(255, 252, 230)';
+export const CHAT_BOX = 'rgb(110, 156, 255)';
 
 export const BORDER_LIGHT_GREYCOLOR = '#EFE9EB';
