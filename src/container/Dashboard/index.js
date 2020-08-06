@@ -4,7 +4,7 @@ import {color} from '../../utility';
 import ImagePicker from 'react-native-image-picker';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {clearAsyncStorage} from '../../asyncStorge';
-import {LogOutUser, UpdateUser} from '../../network';
+import {LogOutUser, UpdateUser, RemoveUser} from '../../network';
 import {Profile, ShowUsers, StickyHeader} from '../../component';
 import firebase from '../../firebase/config';
 import {Store} from '../../context/store';
@@ -42,6 +42,30 @@ const Dashboard = ({navigation}) => {
                 {
                   text: 'Yes',
                   onPress: () => logout(),
+                },
+                {
+                  text: 'No',
+                },
+              ],
+              {cancelable: false},
+            )
+          }
+        />
+      ),
+      headerLeft: () => (
+        <SimpleLineIcons
+          name="settings"
+          size={26}
+          color={color.WHITE}
+          style={{right: -10}}
+          onPress={() =>
+            Alert.alert(
+              'Delete Account',
+              'Are you sure want to delete your account ?',
+              [
+                {
+                  text: 'Yes',
+                  onPress: () => deleteAccount(),
                 },
                 {
                   text: 'No',
@@ -96,6 +120,76 @@ const Dashboard = ({navigation}) => {
       });
     }
   }, []);
+
+  const deleteAccount = () => {
+    const options = {
+      storageOptions: {
+        skipBackup: true,
+      },
+    };
+    dispatchLoaderAction({
+      type: LOADING_START,
+    });
+    RemoveUser(uuid)
+      .then(() => {
+        dispatchLoaderAction({
+          type: LOADING_STOP,
+        });
+        navigation.replace('SignUp');
+      })
+      .catch((err) => {
+        alert(err);
+        dispatchLoaderAction({
+          type: LOADING_STOP,
+        });
+      });
+  };
+
+  const deletePhotoTapped = () => {
+    const options = {
+      storageOptions: {
+        skipBackup: true,
+      },
+    };
+
+    Alert.alert(
+      'Remove Profile Image',
+      'Do you really want to remove profile image ?',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            let source = '';
+            dispatchLoaderAction({
+              type: LOADING_START,
+            });
+            UpdateUser(uuid, source)
+              .then(() => {
+                setUserDetail({
+                  ...userDetail,
+                  profileImg: '',
+                });
+                dispatchLoaderAction({
+                  type: LOADING_STOP,
+                });
+              })
+              .catch((err) => {
+                alert(err);
+                dispatchLoaderAction({
+                  type: LOADING_STOP,
+                });
+              });
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+  };
   const selectPhotoTapped = () => {
     const options = {
       storageOptions: {
@@ -218,6 +312,7 @@ const Dashboard = ({navigation}) => {
               img={profileImg}
               name={name}
               onEditImgTap={() => selectPhotoTapped()}
+              onDeleteImgTap={() => deletePhotoTapped()}
               onImgTap={() => imgTap(profileImg, name)}
             />
           </View>

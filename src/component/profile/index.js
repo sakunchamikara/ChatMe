@@ -5,7 +5,7 @@ import styles from './styles';
 import {globalStyle, color} from '../../utility';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-export default ({img, name, onImgTap, onEditImgTap}) => (
+export default ({img, name, onImgTap, onEditImgTap, onDeleteImgTap}) => (
   <View style={[globalStyle.sectionCentered, styles.container]}>
     <View style={styles.imgContainer}>
       <TouchableOpacity onPress={onImgTap} activeOpacity={0.8}>
@@ -26,7 +26,7 @@ export default ({img, name, onImgTap, onEditImgTap}) => (
         <FontAwesome5
           name="trash"
           size={20}
-          onPress={onEditImgTap}
+          onPress={onDeleteImgTap}
           color={color.WHITE}
         />
       </View>

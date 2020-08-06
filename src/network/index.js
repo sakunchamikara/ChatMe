@@ -1,6 +1,6 @@
 import LoginRequest from './login';
 import SignUpRequest from './signUp';
-import {AddUser, UpdateUser} from './user';
+import {AddUser, UpdateUser, RemoveUser} from './user';
 import LogOutUser from './logout';
 import {senderMsg, recieverMsg} from './messeges';
 
@@ -12,4 +12,5 @@ export {
   UpdateUser,
   senderMsg,
   recieverMsg,
+  RemoveUser,
 };

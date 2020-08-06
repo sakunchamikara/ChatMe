@@ -28,3 +28,21 @@ export const UpdateUser = async (uuid, imgSource) => {
     return error;
   }
 };
+
+export const RemoveUser = async (uuid) => {
+  try {
+    return await firebase
+      .auth()
+      .currentUser.delete()
+      .then(
+        function () {
+          console.log('Remove succeeded.' + firebase.auth().currentUser);
+        },
+        function (error) {
+          console.log('Remove failed: ' + error.message);
+        },
+      );
+  } catch (error) {
+    return error;
+  }
+};

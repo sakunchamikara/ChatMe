@@ -25,7 +25,7 @@ function NavContainer() {
           headerTitleAlign: 'center',
           headerTitleStyle: {
             fontWeight: 'bold',
-            fontSize: 20,
+            fontSize: 22,
           },
         }}>
         <Stack.Screen
