@@ -74,13 +74,13 @@ const Login = ({navigation}) => {
   const handleFocus = () => {
     setTimeout(() => {
       toggleLogo(false);
-    }, 200);
+    }, 100);
   };
 
   const handleBlur = () => {
     setTimeout(() => {
       toggleLogo(true);
-    }, 200);
+    }, 100);
   };
 
   return (
@@ -94,6 +94,8 @@ const Login = ({navigation}) => {
           {showLogo && (
             <View style={[globalStyle.containerCentered]}>
               <Logo />
+              <Text style={[globalStyle.mydetails]}>H.S. CHAMIKARA</Text>
+              <Text style={[globalStyle.mydetails]}>17000149</Text>
             </View>
           )}
           <View style={(globalStyle.flex2, globalStyle.sectionCentered)}>

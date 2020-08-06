@@ -18,6 +18,12 @@ export default StyleSheet.create({
     alignItems: 'center',
     flex: 1,
   },
+
+  mydetails: {
+    fontSize: 25,
+    fontWeight: 'bold',
+  },
+
   sectionCentered: {justifyContent: 'center', alignItems: 'center'},
 
   /* Aligning items */

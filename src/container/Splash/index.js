@@ -21,7 +21,7 @@ const Splash = ({navigation}) => {
           console.log(err);
           navigation.replace('Login');
         });
-    }, 1000);
+    }, 200);
     return () => clearTimeout(redirect);
   }, [navigation]);
   return (
